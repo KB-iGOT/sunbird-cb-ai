@@ -1862,6 +1862,7 @@
         "mGyaanKarmayogiDescription":"Knowledge repository of policy documents, case studies, best practices, and other learning resources from various stakeholders in the field of governance and public services.",
         "mEnterYourText":"Enter your text",
         "mStaticRecentlyAddedCourses" : "Recently added courses",
-        "mStaticRecentlyAddedPrograms" : "Recently added programs"
+        "mStaticRecentlyAddedPrograms" : "Recently added programs",
+        "mBatchStartConsent":"kindly go through the content and be prepared."
     }
 }
