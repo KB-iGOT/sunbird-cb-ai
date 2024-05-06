@@ -32,7 +32,7 @@ app.post('/proxy', async (req, res) => {
     try {
         const response = await axios.post(req.body.url, req.body.data);
         data = {'request': req.body, 'response' : response}
-        es.saveToEDB(data, req.body.user_name, req.body.machine_id, es_index_conversation, (err, res)=>{
+        const es_response = await es.saveToEDB(data, req.body.user_name, req.body.machine_id, es_index_conversation, (err, res)=>{
             if(err){
                 console.log(err)
             }else{
