@@ -4,7 +4,8 @@ var es = require('./modules/es/persist');
 const path = require('path'); // Import path module
 const app = express();
 const PORT = process.env.PORT || 3000;
-
+const es_index_feedback = "doc_qna_feedback"
+const es_index_conversation = "doc_qna_conversation"
 app.use(express.json());
 
 // CORS middleware
@@ -30,6 +31,14 @@ app.post('/proxy', async (req, res) => {
     console.log(req.body)
     try {
         const response = await axios.post(req.body.url, req.body.data);
+        data = {'request': req.body, 'response' : response}
+        es.saveToEDB(data, req.body.user_name, req.body.machine_id, es_index_conversation, (err, res)=>{
+            if(err){
+                console.log(err)
+            }else{
+                console.log(res)
+            }
+        })
         res.json(response.data);
     } catch (error) {
         console.error(error);
@@ -45,7 +54,7 @@ app.post('/gather/feedback', async (req, res) => {
         console.log(req.body.answer)
         console.log(req.body.machine_id)
         console.log(req.body.userName)
-        es.saveToEDB(req.body, req.body.user_name, req.body.machine_id, (err, res)=>{
+        es.saveToEDB(req.body, req.body.user_name, req.body.machine_id, es_index_feedback, (err, res)=>{
             if(err){
                 console.log(err)
             }else{
