@@ -22,6 +22,8 @@ function saveToEDB(data, created_by, session_id, es_index, cb){
 	   },(err, resp, status)=>{
 		   if(err){
 		     console.log(err)
+		   }else{
+			console.log(resp)
 		   }
 	   });
 	}
