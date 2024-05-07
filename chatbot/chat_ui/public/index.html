@@ -26,12 +26,16 @@
             border: 1px solid #ccc;
             border-radius: 10px;
             margin: 20px;
+            position: relative; 
         }
 
         .message {
             margin-bottom: 20px;
             position: relative;
             clear: both;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         .user-message {
@@ -58,6 +62,8 @@
             position: relative;
             clear: both;
             padding-bottom: 20px; /* Added padding */
+            align-items: center; 
+            justify-content: center; 
         }
 
         .reference-content {
@@ -66,21 +72,32 @@
             background-color: #f0f0f0;
             border-radius: 5px;
             display: none;
+            color: black;
         }
 
         .reference-content p{
             color:#000000;
             margin: 5px 0;
         }
+      
+        .highlight {
+            color: blue;
+            cursor: pointer;
+            text-decoration: underline;
+        }
 
-        .expand-reference {
+        .highlight:hover {
+            text-decoration: underline;
+        }
+
+        .expand-reference .highlight {
             color: blue;
             cursor: pointer;
         }
 
-        .expand-reference:hover {
+        /* .expand-reference .highlight:hover {
             text-decoration: underline;
-        }
+        } */
 
         .input-container {
             width: 100%;
@@ -107,24 +124,38 @@
             cursor: pointer;
             margin-bottom: 10px; /* Added margin */
         }
-
+        .received-content{
+            display: inline-block;
+        }
+        .message-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        .received .message-container {
+            align-items: flex-end;
+        }
         .feedback-window {
-            margin-top: 10px; /* Adjusted margin */
-            margin-bottom: 10px; /* Added margin */
+            margin-top: 5px;
+            margin-bottom: 5px;
             font-size: 12px;
             color: #666;
         }
 
         .feedback-buttons {
-            margin-top: 10px;
+            margin-top: 5px;
+            margin-bottom: 5px;
         }
 
         .feedback-buttons button {
-            margin-right: 10px;
-            padding: 5px 10px;
+            margin-right: 15px;
+            padding: 3px 8px;
             border-radius: 5px;
             border: none;
             cursor: pointer;
+            z-index: 1;
+            font-size: 15px;
         }
 
         /* Adjust the styles for good and bad buttons as needed */
@@ -137,11 +168,135 @@
             background-color: #dc3545;
             color: #fff;
         }
+        .feedback-section {
+            align-self: flex-start
+        }
+        .toast {
+            position: absolute;
+            top: 75%; 
+            left: calc(16% + 10px); 
+            transform: translate(-50%, -50%);
+            background-color: #4c77af;
+            color: white;
+            padding: 16px;
+            z-index: 1;
+            display: none;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+        .duration-text {
+            font-size: 15px; 
+            color: #666;
+        }
+        .loader {   
+            padding:16px 28px;
+            -webkit-border-radius: 20px;
+            -webkit-border-bottom-left-radius: 2px;
+            -moz-border-radius: 20px;
+            -moz-border-radius-bottomleft: 2px;
+            border-radius: 20px;
+            border-bottom-left-radius: 2px;
+            display:inline-block;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+            width: 100%; 
+            text-align: center;
+            }
+
+            .typing {
+            align-items: center;
+            display: flex;
+            height: 17px;
+            }
+
+            .typing .dot {
+            animation: mercuryTypingAnimation 1.8s infinite ease-in-out;
+            background-color: #6CAD96;
+            border-radius: 50%;
+            height: 7px;
+            margin-right: 4px;
+            vertical-align: middle;
+            width: 7px;
+            display: inline-block;
+            }
+
+            .typing .dot:nth-child(1) {
+            animation-delay: 200ms;
+            }
+
+            .typing .dot:nth-child(2) {
+            animation-delay: 300ms;
+            }
+
+            .typing .dot:nth-child(3) {
+            animation-delay: 400ms;
+            }
+
+            .typing .dot:last-child {
+            margin-right: 0;
+            }
+
+            @keyframes mercuryTypingAnimation {
+            0% {
+                transform: translateY(0px);
+                background-color: #766cad;
+            }
+            28% {
+                transform: translateY(-7px);
+                background-color: #766cad;
+            }
+            44% {
+                transform: translateY(0px);
+                background-color: #766cad;
+            }
+        }
     </style>
 </head>
 <body>
 
+    <!-- Toast message container -->
+    <!-- <div id="toast" class="toast"></div> -->
+
     <script>
+        // Function to display the loader
+        function displayLoader() {
+            var loader = document.getElementById('loader');
+            if (loader) {
+                loader.style.display = 'block'; // Ensure loader is visible
+            } else {
+                console.error('Loader element not found.');
+            }
+        }
+
+        // Function to hide the loader
+        function hideLoader() {
+            var loader = document.getElementById('loader');
+            if (loader) {
+                loader.style.display = 'none'; // Hide the loader
+            }
+        }
+
+       // Function to display the toast message
+        function showToast(message) {
+            console.log('showToast called with message:', message);
+        var toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.style.display = 'block'; // Show the toast
+        setTimeout(function() {
+            clearToast(); // Clear the toast message after 3 seconds
+        }, 3000);
+        }
+
+        // Function to clear the toast message
+        function clearToast() {
+            console.log('clearToast called');
+            var toast = document.getElementById('toast');
+            toast.textContent = ''; // Clear the toast message
+            toast.style.display = 'none'; // Hide the toast
+        }
+
+
         // Function to prompt user for their name and store it in local storage
         function promptForName() {
             var userName = prompt("Please enter your name:");
@@ -178,14 +333,30 @@
         displayUserName();
     </script>
     <div class="chat-container">
-        <div class="chat-messages" id="chat-messages"></div>
+         <!-- Loader element -->
+        <div class="chat-messages" id="chat-messages">
+            <div id="loader" class="loader" style="display:none;">
+                <div class="typing">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                </div>
+            </div>
+            
+        </div>         
         <form id="chat-form" class="input-container">
             <input type="text" id="user-input" placeholder="Type your message...">
-            <input type="submit" value="Send">
+            <input type="submit" value="Send" >
         </form>
+        <div id="toast" class="toast"></div>
     </div>
 
     <script>
+         // Function to scroll the chat container to the bottom
+         function autoscrollChat() {
+            var chatMessages = document.getElementById('chat-messages');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
 
          // Generate machine ID function
          function generateMachineID() {
@@ -205,39 +376,78 @@
 
         document.getElementById('chat-form').addEventListener('submit', function(event) {
             event.preventDefault();
-            var userInput = document.getElementById('user-input').value.trim();
-            if (userInput === '') return;
             
-            var chatMessages = document.getElementById('chat-messages');
-            var userMessage = document.createElement('div');
-            userMessage.classList.add('message');
-            userMessage.innerHTML = '<div class="user-message">' + userInput + '</div>';
-            chatMessages.appendChild(userMessage);
+            // Record the timestamp when the user sends a message
+            var startTime = new Date().getTime();
 
+            // Get user input
+            var userInput = document.getElementById('user-input').value.trim(); // Get user input and remove leading/trailing spaces
+            if (!userInput) {
+                // If the user input is empty, don't proceed further
+                return;
+            }
+            var chatMessages = document.getElementById('chat-messages');
+            var userMessageContainer = document.createElement('div');
+            userMessageContainer.classList.add('message', 'sent');
+            userMessageContainer.innerHTML = '<div class="user-message">' + userInput + '</div>';
+            chatMessages.appendChild(userMessageContainer);
+            autoscrollChat(); // Scroll to the bottom after appending the user's message
+
+            var loader = document.getElementById('loader');
+            if (loader) {
+                chatMessages.appendChild(loader);
+                autoscrollChat(); // Scroll to the bottom after appending the user's question
+            }
+
+            displayLoader();
+
+            // // Check if the user input is "hi"
+            // if (userInput.toLowerCase() === "hi") {
+            //     // If the user input is "hi", send a specific response
+            //     var botMessageContainer = document.createElement('div');
+            //     botMessageContainer.classList.add('message', 'received');
+            //     botMessageContainer.innerHTML = '<div class="bot-message">I\'m sorry, your question wasn\'t clear to me. Could you please rephrase it and ask again?</div>';
+            //     chatMessages.appendChild(botMessageContainer);
+            //     appendFeedbackSectionToMessage(botMessageContainer, userInput, null); // Append feedback section to the bot's message
+            //     autoscrollChat(); // Scroll to the bottom after appending the bot's answer
+
+            // }
             // Make a POST request to the local Node.js server acting as a CORS proxy
             var xhr = new XMLHttpRequest();
-            var proxyUrl = 'http://localhost:3000/proxy'; // Local Node.js server URL
+            // var proxyUrl = 'http://localhost:3000/proxy'; // Local Node.js server URL
+            var proxyUrl = 'https://portal.karmayogi.nic.in/testpdf/proxy';
             var targetUrl = 'https://portal.karmayogi.nic.in/pdf-processing/generate-answers'; // Target URL
             //var proxyUrl = 'https://portal.karmayogi.nic.in/testpdf/proxy'; // Local Node.js server URL
             //var targetUrl = 'http://localhost:5000/generate-answers'; // Target URL
             xhr.open('POST', proxyUrl, true);
             xhr.setRequestHeader('Content-Type', 'application/json');
-            
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
+                    // Calculate the duration when the response is received
+                    var endTime = new Date().getTime();
+                    var duration = endTime - startTime;
+                    var durationInSeconds = Math.floor(duration / 1000); // Convert milliseconds to seconds
+                    var minutes = Math.floor(durationInSeconds / 60); // Get the whole minutes
+                    var seconds = durationInSeconds % 60; // Get the remaining seconds
+
+                    // Format the duration as "minutes:seconds"
+                    var formattedDuration = minutes + ' minutes ' + seconds + ' seconds';
+                    hideLoader();
                     if (xhr.status === 200) {
                         var response = JSON.parse(xhr.responseText);
                         var botMessage = document.createElement('div');
-                        botMessage.classList.add('message');
+                        botMessage.classList.add('message','received'); 
 
                         // Check if the response contains "closest context"
-                        if (Array.isArray(response['closest context'])) {
+                        if (Array.isArray(response['closest context']) && response['closest context'].length > 0) {
                             // If it's an array, assume it's a context-based response
                             var contextParagraphs = response['closest context'].map(function(chunk) {
-                                return '<p><p style="background-color: yellow;">' + chunk['do_id'] + '(' + chunk['text-chunk'] + '...)' + chunk['document'] + '</p></p>';
+                                return '<div style="margin-bottom: 10px;"><strong>Course ID:</strong> ' + chunk['do_id'] + '<br>' +
+                                    // '<strong>Document Name:</strong> ' + chunk['document'] + '<br>' +
+                                    '<strong>Document Chunk:</strong> ' + chunk['text-chunk'] + '</div>';
                             }).join('');
                             botMessage.innerHTML = '<div class="bot-message">' + JSON.parse(response.generated_ans)['response'] + 
-                                                    '<span class="expand-reference"> (Context)</span>' +
+                                                    '<span class="expand-reference"> (Curious about where this answer comes from? Click to know more.)</span>' +
                                                     '<div class="reference-content">' +
                                                     contextParagraphs +
                                                     '</div></div>';
@@ -248,16 +458,24 @@
                         } else {
                             // Handle other types of responses here
                             // For now, let's assume it's a general text response
-                            botMessage.innerHTML = '<div class="bot-message">' + response.generated_ans + '</div>';
+                            botMessage.innerHTML = '<div class="bot-message">' + response.generated_ans + '</div>' + '<div class="feedback-window">Response took ' + formattedDuration + '</div>';
                         }
 
                         chatMessages.appendChild(botMessage);
+                        appendFeedbackSectionToMessage(botMessage,userInput, response); // Append feedback section to bot's message
+                        autoscrollChat(); // Scroll to the bottom after appending the bot's answer
 
+                        var durationElement = document.createElement('div');
+                        durationElement.textContent = 'Response took ' + formattedDuration;
+                        durationElement.classList.add('duration-text');
+                        botMessage.appendChild(durationElement);
+
+                       
                         // Add feedback window
-                        var feedbackWindow = document.createElement('div');
-                        feedbackWindow.classList.add('feedback-window');
-                        feedbackWindow.textContent = "How helpful was this answer?";
-                        botMessage.appendChild(feedbackWindow);
+                        // var feedbackWindow = document.createElement('div');
+                        // feedbackWindow.classList.add('feedback-window');
+                        // feedbackWindow.textContent = "How helpful was this answer?";
+                        // botMessage.appendChild(feedbackWindow);
 
                         // Add input box for feedback
                         //var feedbackInput = document.createElement('input');
@@ -265,56 +483,117 @@
                         //feedbackInput.placeholder = "Provide feedback...";
                         //botMessage.appendChild(feedbackInput);
 
-                        // Add good and bad feedback buttons
-                        var feedbackButtons = document.createElement('div');
-                        feedbackButtons.classList.add('feedback-buttons');
+                        // Create feedback buttons
+                        // var feedbackButtons = document.createElement('div');
+                        // feedbackButtons.classList.add('feedback-buttons');
 
-                        var goodFeedbackBtn = document.createElement('button');
-                        goodFeedbackBtn.textContent = "Good";
-                        goodFeedbackBtn.classList.add('good-feedback');
-                        goodFeedbackBtn.addEventListener('click', function() {
-                            sendFeedback("good", userInput, response, machineID, userName);
-                            //feedbackInput.value = ''; // Clear feedback input
-                        });
-                        feedbackButtons.appendChild(goodFeedbackBtn);
+                        // var goodFeedbackBtn = document.createElement('button');
+                        // goodFeedbackBtn.textContent = "Good";
+                        // goodFeedbackBtn.classList.add('good-feedback');
+                        // goodFeedbackBtn.addEventListener('click', function() {
+                        //     sendFeedback("good", userInput, response, machineID, userName);
+                        // });
+                        // feedbackButtons.appendChild(goodFeedbackBtn);
 
-                        var badFeedbackBtn = document.createElement('button');
-                        badFeedbackBtn.textContent = "Bad";
-                        badFeedbackBtn.classList.add('bad-feedback');
-                        badFeedbackBtn.addEventListener('click', function() {
-                            sendFeedback("bad", userInput, response, machineID, userName);
-                            //feedbackInput.value = ''; // Clear feedback input
-                        });
-                        feedbackButtons.appendChild(badFeedbackBtn);
+                        // var badFeedbackBtn = document.createElement('button');
+                        // badFeedbackBtn.textContent = "Bad";
+                        // badFeedbackBtn.classList.add('bad-feedback');
+                        // badFeedbackBtn.addEventListener('click', function() {
+                        //     sendFeedback("bad", userInput, response, machineID, userName);
+                        // });
+                        // feedbackButtons.appendChild(badFeedbackBtn);
 
-                        botMessage.appendChild(feedbackButtons);
+                        // Append feedback buttons to the botMessage element
+                        // botMessage.appendChild(feedbackButtons); // Append feedback buttons under the bot's answer
 
                         // Toggle reference content visibility
-                        botMessage.querySelector('.expand-reference').addEventListener('click', function() {
-                            var referenceContent = botMessage.querySelector('.reference-content');
-                            referenceContent.style.display = referenceContent.style.display === 'none' ? 'block' : 'none';
+                        var expandReference = botMessage.querySelector('.expand-reference');
+                        expandReference.classList.add('highlight'); // Add highlight class to make it clickable
+                        expandReference.addEventListener('click', function() {
+                        var referenceContent = botMessage.querySelector('.reference-content');
+                        referenceContent.style.display = referenceContent.style.display === 'none' ? 'block' : 'none';
                         });
+
+                        var expandReferenceText = expandReference.textContent;
+                        var highlightedText = expandReferenceText.replace('Click', '<span class="highlight">Click</span>');
+                        expandReference.innerHTML = highlightedText;
+
                     } else {
+                        // Display failure message
+                        var failureMessage = document.createElement('div');
+                        failureMessage.classList.add('message','received');
+                        failureMessage.innerHTML = '<div class="bot-message">We\'re experiencing difficulties retrieving the answer at the moment. Please try again later.</div>';
+                        chatMessages.appendChild(failureMessage);
+                        appendFeedbackSectionToMessage(failureMessage); // Append feedback section to the failure message
+                        autoscrollChat(); // Scroll to the bottom after appending the bot's answer
                         console.error('Error:', xhr.statusText);
                     }
                 }
             };
             var data = JSON.stringify({ url: targetUrl, data: { query: userInput } });
+            console.log("data: ",data)
             xhr.send(data);
 
             // Clear user input
             document.getElementById('user-input').value = '';
+
+            autoscrollChat(); // Scroll to the bottom after appending the user's question
         });
 
-        function sendFeedback(feedbackText, ques, ans, machineID, userName) {
+                function appendFeedbackSectionToMessage(botMessage,userInput, response) {
+                var feedbackSection = document.createElement('div');
+                feedbackSection.classList.add('feedback-section');
+
+                var feedbackWindow = document.createElement('div');
+                feedbackWindow.classList.add('feedback-window');
+                feedbackWindow.textContent = "How helpful was this answer?";
+                feedbackSection.appendChild(feedbackWindow);
+
+                var feedbackButtons = document.createElement('div');
+                feedbackButtons.classList.add('feedback-buttons');
+
+                var goodFeedbackBtn = document.createElement('button');
+                goodFeedbackBtn.textContent = "Good";
+                goodFeedbackBtn.classList.add('good-feedback');
+                goodFeedbackBtn.addEventListener('click', function() {
+                    sendFeedback("good", userInput, response, machineID, userName,this);
+                    // showToast("Thank you for your feedback.");
+                });
+                feedbackButtons.appendChild(goodFeedbackBtn);
+
+                var badFeedbackBtn = document.createElement('button');
+                badFeedbackBtn.textContent = "Bad";
+                badFeedbackBtn.classList.add('bad-feedback');
+                badFeedbackBtn.addEventListener('click', function() {
+                    sendFeedback("bad", userInput, response, machineID, userName,this);
+                    // showToast("Thank you for your feedback.");
+                });
+                feedbackButtons.appendChild(badFeedbackBtn);
+
+                feedbackSection.appendChild(feedbackButtons);
+
+                botMessage.appendChild(feedbackSection); // Append the feedback section under the bot's message
+            }
+
+
+        function sendFeedback(feedbackText, ques, ans, machineID, userName, button) {
+            var toast = document.createElement('div');
+            toast.classList.add('toast');
+            toast.textContent = "Thank you for your feedback";
+            toast.style.display = 'block'; 
+            button.parentNode.appendChild(toast);
+             
             var xhr = new XMLHttpRequest();
             var feedbackUrl = 'https://portal.karmayogi.nic.in/testpdf/gather/feedback';
             xhr.open('POST', feedbackUrl, true);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        console.log('Feedback submitted successfully.');
+                    if (xhr.status === 200) {                       
+                       // Show toast message when feedback is submitted successfully
+                        setTimeout(function() {
+                            toast.style.display = 'none';
+                        }, 3000); // Hide the toast after 3 seconds
                     } else {
                         console.error('Error submitting feedback:', xhr.statusText);
                     }
@@ -324,6 +603,11 @@
             
             xhr.send(feedbackData);
         }
+    </script>
+     <script>
+        // Scroll to the bottom of the chat container initially and after new messages are added
+        var chatMessages = document.getElementById('chat-messages');
+        chatMessages.scrollTop = chatMessages.scrollHeight;
     </script>
 </body>
 </html>
