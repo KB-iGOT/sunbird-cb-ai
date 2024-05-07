@@ -2067,7 +2067,15 @@
         "skrishnan":"Shri S. Krishnan",
         "shyamaPrasad":"Shri Shyama Prasad Roy",
         "skrishnanRoles":"Secretary - Ministry of Electronics and Information Technology (MeitY)",
-        "shyamaPrasadRoles":"Secretary - Capacity Building Commission"
+        "shyamaPrasadRoles":"Secretary - Capacity Building Commission",
+        "vaibhavAgarwalRoles": "Finance Executive",
+        "rajeshKumarRoles": "Manager Accounts",
+        "harleenSachdevaRoles": "Chief Human Resources Officer",
+        "sahilJainRoles": "Graphic Designer",
+        "vaibhavAgarwal": "Vaibhav Agarwal",
+        "rajeshKumar": "Rajesh Kumar",
+        "harleenSachdeva": "Harleen Sachdeva",
+        "sahilJain": "Sahil Jain"
 
     },
     "profileCertificateDialog": {
