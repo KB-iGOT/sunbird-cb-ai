@@ -31,8 +31,8 @@ app.post('/proxy', async (req, res) => {
     console.log(req.body)
     try {
         const response = await axios.post(req.body.url, req.body.data);
-        data = {'request': req.body, 'response' : response}
-        const es_response = await es.saveToEDB(data, req.body.user_name, req.body.machine_id, es_index_conversation, (err, res)=>{
+        const data = {'query': req.body.data.query, 'response' : response.data}
+        await es.saveToEDB(data, req.body.user_name, req.body.machine_id, es_index_conversation, (err, res)=>{
             if(err){
                 console.log(err)
             }else{
