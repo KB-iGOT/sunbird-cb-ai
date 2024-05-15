@@ -1844,6 +1844,25 @@
         "mRateOnWeeklyClapCongratsText": "Congratulations on your weekly clap!",
         "mRateOnWeeklyClapCongratsDescription": "Enjoying the iGOT experience? Rate us!",
         "mRateOnWeeklyClapRateText": "Rate Now",
-        "mRateOnWeeklyClapLaterText": "Maybe Later"
+        "mRateOnWeeklyClapLaterText": "Maybe Later",
+        "mStaticViewAll":"View all",
+        "mSearchInGyaanKarmayogi":"Search in Gyaan Karmayogi",
+        "mStaticSector":"Sector",
+        "mStaticSubSector":"Sub sector",
+        "mSearchSector":"Search sector",
+        "mSearchSubSector":"Search sub-sector",
+        "mSearchCategory":"Search category",
+        "mRelatedResources":"Related resources",
+        "mPublishedOn":"Published on",
+        "mResourceType":"Resource type",
+        "mStaticSectors":"Sectors",
+        "mStaticSubSectors":"Sub-Sectors",
+        "mNoResourcesFound":"No resources found",
+        "mViewAllCategories":"View all categories",
+        "mGyaanKarmayogiDescription":"Knowledge repository of policy documents, case studies, best practices, and other learning resources from various stakeholders in the field of governance and public services.",
+        "mEnterYourText":"Enter your text",
+        "mStaticRecentlyAddedCourses" : "Recently added courses",
+        "mStaticRecentlyAddedPrograms" : "Recently added programs",
+        "mBatchStartConsent":"kindly go through the content and be prepared."
     }
 }
