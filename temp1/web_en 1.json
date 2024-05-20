@@ -9,6 +9,15 @@
         "viewProfile": "View Profile",
         "learningHistory": "Learning History"
     },
+
+    "karmayogiTeam1": {
+        "title": "Meet Our Team",
+        "boardOfDirectorTab": "Board of Directors",
+        "karmayogiTeamTab": "Karmayogi Team",
+        "teamMembers": {
+            "subramanianRamadorai": "12345"
+        }
+    },
     "requestDialog": {
         "designationRequest": "Request to add designation",
         "organisation": "Organisation",
