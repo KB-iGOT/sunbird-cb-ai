@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat Window</title>
     <style>
-        body, html {
+        body,
+        html {
             height: 100%;
             margin: 0;
             padding: 0;
@@ -26,7 +28,7 @@
             border: 1px solid #ccc;
             border-radius: 10px;
             margin: 20px;
-            position: relative; 
+            position: relative;
         }
 
         .message {
@@ -58,12 +60,14 @@
             max-width: 70%;
             word-wrap: break-word;
             float: left;
-            margin-bottom: 20px; /* Increased margin */
+            margin-bottom: 20px;
+            /* Increased margin */
             position: relative;
             clear: both;
-            padding-bottom: 20px; /* Added padding */
-            align-items: center; 
-            justify-content: center; 
+            padding-bottom: 20px;
+            /* Added padding */
+            align-items: center;
+            justify-content: center;
         }
 
         .reference-content {
@@ -75,11 +79,11 @@
             color: black;
         }
 
-        .reference-content p{
-            color:#000000;
+        .reference-content p {
+            color: #000000;
             margin: 5px 0;
         }
-      
+
         .highlight {
             color: blue;
             cursor: pointer;
@@ -95,10 +99,6 @@
             cursor: pointer;
         }
 
-        /* .expand-reference .highlight:hover {
-            text-decoration: underline;
-        } */
-
         .input-container {
             width: 100%;
             max-width: 800px;
@@ -112,7 +112,7 @@
             border-radius: 20px;
             border: 1px solid #ccc;
             margin-right: 10px;
-            margin-bottom: 10px; /* Added margin */
+            margin-bottom: 10px;
         }
 
         .input-container input[type="submit"] {
@@ -122,20 +122,24 @@
             background-color: #007bff;
             color: #fff;
             cursor: pointer;
-            margin-bottom: 10px; /* Added margin */
+            margin-bottom: 10px;
         }
-        .received-content{
+
+        .received-content {
             display: inline-block;
         }
+
         .message-container {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             margin-bottom: 20px;
         }
+
         .received .message-container {
             align-items: flex-end;
         }
+
         .feedback-window {
             margin-top: 5px;
             margin-bottom: 5px;
@@ -168,13 +172,15 @@
             background-color: #dc3545;
             color: #fff;
         }
+
         .feedback-section {
             align-self: flex-start
         }
+
         .toast {
             position: absolute;
-            top: 75%; 
-            left: calc(16% + 10px); 
+            top: 75%;
+            left: calc(16% + 10px);
             transform: translate(-50%, -50%);
             background-color: #4c77af;
             color: white;
@@ -184,33 +190,35 @@
             border-radius: 10px;
             font-size: 16px;
         }
+
         .duration-text {
-            font-size: 15px; 
+            font-size: 15px;
             color: #666;
         }
-        .loader {   
-            padding:16px 28px;
+
+        .loader {
+            padding: 16px 28px;
             -webkit-border-radius: 20px;
             -webkit-border-bottom-left-radius: 2px;
             -moz-border-radius: 20px;
             -moz-border-radius-bottomleft: 2px;
             border-radius: 20px;
             border-bottom-left-radius: 2px;
-            display:inline-block;
+            display: inline-block;
             top: 20px;
             left: 20px;
             z-index: 10;
-            width: 100%; 
+            width: 100%;
             text-align: center;
-            }
+        }
 
-            .typing {
+        .typing {
             align-items: center;
             display: flex;
             height: 17px;
-            }
+        }
 
-            .typing .dot {
+        .typing .dot {
             animation: mercuryTypingAnimation 1.8s infinite ease-in-out;
             background-color: #6CAD96;
             border-radius: 50%;
@@ -219,42 +227,132 @@
             vertical-align: middle;
             width: 7px;
             display: inline-block;
-            }
+        }
 
-            .typing .dot:nth-child(1) {
+        .typing .dot:nth-child(1) {
             animation-delay: 200ms;
-            }
+        }
 
-            .typing .dot:nth-child(2) {
+        .typing .dot:nth-child(2) {
             animation-delay: 300ms;
-            }
+        }
 
-            .typing .dot:nth-child(3) {
+        .typing .dot:nth-child(3) {
             animation-delay: 400ms;
-            }
+        }
 
-            .typing .dot:last-child {
+        .typing .dot:last-child {
             margin-right: 0;
-            }
+        }
 
-            @keyframes mercuryTypingAnimation {
+        @keyframes mercuryTypingAnimation {
             0% {
                 transform: translateY(0px);
                 background-color: #766cad;
             }
+
             28% {
                 transform: translateY(-7px);
                 background-color: #766cad;
             }
+
             44% {
                 transform: translateY(0px);
                 background-color: #766cad;
             }
         }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            background-color: #fefefe;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .modal-content p {
+            margin-bottom: 10px;
+            align-self: flex-start;
+        }
+
+        .modal-content textarea {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: vertical;
+        }
+
+        .modal-content button {
+            padding: 8px 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .close {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .radio-group {
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            align-self: flex-start;
+        }
+
+        .radio-group label {
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+        }
+
     </style>
 </head>
+
 <body>
 
+    <!-- Feedback Modal -->
+    <div id="commentModal" class="modal">
+        <form id="feedbackForm" class="modal-content" onsubmit="handleSubmit(event)">
+            <span class="close">&times;</span>
+            <p id="feedbackPrompt"></p>
+            <div id="radioButtons" class="radio-group">
+                <label><input type="radio" name="feedbackReason" value="Irrelevant"> Incorrect Information</label>
+                <label><input type="radio" name="feedbackReason" value="Incorrect"> Incomplete answer</label>
+                <label><input type="radio" name="feedbackReason" value="Incomplete"> Off-topic response</label>
+                <label><input type="radio" name="feedbackReason" value="Other"> Other</label>
+            </div>
+            <textarea id="feedback-comment" rows="4" cols="50" placeholder="Add a comment..."></textarea>
+            <div class="button-container">
+                <button type="submit" id="submitButton">Submit</button>
+            </div>
+        </form>
+    </div>
     <!-- Toast message container -->
     <!-- <div id="toast" class="toast"></div> -->
 
@@ -277,15 +375,15 @@
             }
         }
 
-       // Function to display the toast message
+        // Function to display the toast message
         function showToast(message) {
             console.log('showToast called with message:', message);
-        var toast = document.getElementById('toast');
-        toast.textContent = message;
-        toast.style.display = 'block'; // Show the toast
-        setTimeout(function() {
-            clearToast(); // Clear the toast message after 3 seconds
-        }, 3000);
+            var toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block'; // Show the toast
+            setTimeout(function () {
+                clearToast(); // Clear the toast message after 3 seconds
+            }, 3000);
         }
 
         // Function to clear the toast message
@@ -327,39 +425,40 @@
         if (!getUserName()) {
             promptForName();
         }
-        
+
 
         // Display user's name at the top of the page
         displayUserName();
+
     </script>
     <div class="chat-container">
-         <!-- Loader element -->
+        <!-- Loader element -->
         <div class="chat-messages" id="chat-messages">
             <div id="loader" class="loader" style="display:none;">
                 <div class="typing">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
                 </div>
             </div>
-            
-        </div>         
+
+        </div>
         <form id="chat-form" class="input-container">
             <input type="text" id="user-input" placeholder="Type your message...">
-            <input type="submit" value="Send" >
+            <input type="submit" value="Send">
         </form>
         <div id="toast" class="toast"></div>
     </div>
 
     <script>
-         // Function to scroll the chat container to the bottom
-         function autoscrollChat() {
+        // Function to scroll the chat container to the bottom
+        function autoscrollChat() {
             var chatMessages = document.getElementById('chat-messages');
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
-         // Generate machine ID function
-         function generateMachineID() {
+        // Generate machine ID function
+        function generateMachineID() {
             var randomID = Math.random().toString(36).substr(2, 10); // Random string
             var timestamp = new Date().getTime(); // Timestamp
             var machineID = randomID + timestamp;
@@ -374,9 +473,9 @@
             localStorage.setItem('machineID', machineID);
         }
 
-        document.getElementById('chat-form').addEventListener('submit', function(event) {
+        document.getElementById('chat-form').addEventListener('submit', function (event) {
             event.preventDefault();
-            
+
             // Record the timestamp when the user sends a message
             var startTime = new Date().getTime();
 
@@ -421,7 +520,7 @@
             //var targetUrl = 'http://localhost:5000/generate-answers'; // Target URL
             xhr.open('POST', proxyUrl, true);
             xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.onreadystatechange = function() {
+            xhr.onreadystatechange = function () {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     // Calculate the duration when the response is received
                     var endTime = new Date().getTime();
@@ -436,25 +535,25 @@
                     if (xhr.status === 200) {
                         var response = JSON.parse(xhr.responseText);
                         var botMessage = document.createElement('div');
-                        botMessage.classList.add('message','received'); 
+                        botMessage.classList.add('message', 'received');
 
                         // Check if the response contains "closest context"
                         if (Array.isArray(response['closest context']) && response['closest context'].length > 0) {
                             // If it's an array, assume it's a context-based response
-                            var contextParagraphs = response['closest context'].map(function(chunk) {
+                            var contextParagraphs = response['closest context'].map(function (chunk) {
                                 return '<div style="margin-bottom: 10px;"><strong>Course ID:</strong> ' + chunk['do_id'] + '<br>' +
                                     // '<strong>Document Name:</strong> ' + chunk['document'] + '<br>' +
                                     '<strong>Document Chunk:</strong> ' + chunk['text-chunk'] + '</div>';
                             }).join('');
-                            botMessage.innerHTML = '<div class="bot-message">' + JSON.parse(response.generated_ans)['response'] + 
-                                                    '<span class="expand-reference"> (Curious about where this answer comes from? Click to know more.)</span>' +
-                                                    '<div class="reference-content">' +
-                                                    contextParagraphs +
-                                                    '</div></div>';
+                            botMessage.innerHTML = '<div class="bot-message">' + JSON.parse(response.generated_ans)['response'] +
+                                '<span class="expand-reference"> (Curious about where this answer comes from? Click to know more.)</span>' +
+                                '<div class="reference-content">' +
+                                contextParagraphs +
+                                '</div></div>';
                         } else if (response['closest context'] === 'faq') {
                             // If it's an FAQ response
-                            botMessage.innerHTML = '<div class="bot-message">' + response.generated_ans.answer.answer + 
-                                                    '</div>';
+                            botMessage.innerHTML = '<div class="bot-message">' + response.generated_ans.answer.answer +
+                                '</div>';
                         } else {
                             // Handle other types of responses here
                             // For now, let's assume it's a general text response
@@ -462,7 +561,7 @@
                         }
 
                         chatMessages.appendChild(botMessage);
-                        appendFeedbackSectionToMessage(botMessage,userInput, response); // Append feedback section to bot's message
+                        appendFeedbackSectionToMessage(botMessage, userInput, response); // Append feedback section to bot's message
                         autoscrollChat(); // Scroll to the bottom after appending the bot's answer
 
                         var durationElement = document.createElement('div');
@@ -470,7 +569,6 @@
                         durationElement.classList.add('duration-text');
                         botMessage.appendChild(durationElement);
 
-                       
                         // Add feedback window
                         // var feedbackWindow = document.createElement('div');
                         // feedbackWindow.classList.add('feedback-window');
@@ -509,9 +607,9 @@
                         // Toggle reference content visibility
                         var expandReference = botMessage.querySelector('.expand-reference');
                         expandReference.classList.add('highlight'); // Add highlight class to make it clickable
-                        expandReference.addEventListener('click', function() {
-                        var referenceContent = botMessage.querySelector('.reference-content');
-                        referenceContent.style.display = referenceContent.style.display === 'none' ? 'block' : 'none';
+                        expandReference.addEventListener('click', function () {
+                            var referenceContent = botMessage.querySelector('.reference-content');
+                            referenceContent.style.display = referenceContent.style.display === 'none' ? 'block' : 'none';
                         });
 
                         var expandReferenceText = expandReference.textContent;
@@ -521,7 +619,7 @@
                     } else {
                         // Display failure message
                         var failureMessage = document.createElement('div');
-                        failureMessage.classList.add('message','received');
+                        failureMessage.classList.add('message', 'received');
                         failureMessage.innerHTML = '<div class="bot-message">We\'re experiencing difficulties retrieving the answer at the moment. Please try again later.</div>';
                         chatMessages.appendChild(failureMessage);
                         appendFeedbackSectionToMessage(failureMessage); // Append feedback section to the failure message
@@ -531,7 +629,7 @@
                 }
             };
             var data = JSON.stringify({ url: targetUrl, data: { query: userInput } });
-            console.log("data: ",data)
+            console.log("data: ", data)
             xhr.send(data);
 
             // Clear user input
@@ -540,58 +638,137 @@
             autoscrollChat(); // Scroll to the bottom after appending the user's question
         });
 
-                function appendFeedbackSectionToMessage(botMessage,userInput, response) {
-                var feedbackSection = document.createElement('div');
-                feedbackSection.classList.add('feedback-section');
+        // Function to display the feedback modal
+        function displayFeedbackModal(promptText) {
+            var commentModal = document.getElementById('commentModal');
+            var feedbackPrompt = document.getElementById('feedbackPrompt');
+            feedbackPrompt.textContent = promptText;
+            commentModal.style.display = 'block';
+        }
 
-                var feedbackWindow = document.createElement('div');
-                feedbackWindow.classList.add('feedback-window');
-                feedbackWindow.textContent = "How helpful was this answer?";
-                feedbackSection.appendChild(feedbackWindow);
+        // Function to close the feedback modal
+        function closeFeedbackModal() {
+            var commentModal = document.getElementById('commentModal');
+            commentModal.style.display = 'none';
+        }
 
-                var feedbackButtons = document.createElement('div');
-                feedbackButtons.classList.add('feedback-buttons');
+        document.getElementById('feedbackForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
 
-                var goodFeedbackBtn = document.createElement('button');
-                goodFeedbackBtn.textContent = "Good";
-                goodFeedbackBtn.classList.add('good-feedback');
-                goodFeedbackBtn.addEventListener('click', function() {
-                    sendFeedback("good", userInput, response, machineID, userName,this);
-                    // showToast("Thank you for your feedback.");
-                });
-                feedbackButtons.appendChild(goodFeedbackBtn);
+            var textarea = document.getElementById('feedback-comment');
+            var radioGroupDiv = document.getElementById('radioButtons');
 
-                var badFeedbackBtn = document.createElement('button');
-                badFeedbackBtn.textContent = "Bad";
-                badFeedbackBtn.classList.add('bad-feedback');
-                badFeedbackBtn.addEventListener('click', function() {
-                    sendFeedback("bad", userInput, response, machineID, userName,this);
-                    // showToast("Thank you for your feedback.");
-                });
-                feedbackButtons.appendChild(badFeedbackBtn);
-
-                feedbackSection.appendChild(feedbackButtons);
-
-                botMessage.appendChild(feedbackSection); // Append the feedback section under the bot's message
+            // Log the value of the selected radio button
+            for (var i = 0; i < radioGroupDiv.children.length; i++) {
+                var radioButton = radioGroupDiv.children[i].firstElementChild;
+                if (radioButton.checked) {
+                    break; // Exit the loop once the selected value is found
+                }
             }
 
+            // Reset all radio buttons in the group to their initial state
+            for (var j = 0; j < radioGroupDiv.children.length; j++) {
+                var radioButton = radioGroupDiv.children[j].firstElementChild;
+                radioButton.checked = false; // Uncheck the radio button
+            }
 
-        function sendFeedback(feedbackText, ques, ans, machineID, userName, button) {
+            // Clear the textarea
+            textarea.value = '';
+
+            // Perform any additional actions, such as closing a modal
+            closeFeedbackModal();
+        });
+        // Function to close the feedback modal
+        function closeFeedbackModal() {
+            var commentModal = document.getElementById('commentModal');
+            commentModal.style.display = 'none';
+        }
+
+
+        function appendFeedbackSectionToMessage(botMessage, userInput, response) {
+            var feedbackSection = document.createElement('div');
+            feedbackSection.classList.add('feedback-section');
+
+            var feedbackWindow = document.createElement('div');
+            feedbackWindow.classList.add('feedback-window');
+            feedbackWindow.textContent = "How helpful was this answer?";
+            feedbackSection.appendChild(feedbackWindow);
+
+            var feedbackButtons = document.createElement('div');
+            feedbackButtons.classList.add('feedback-buttons');
+
+            var goodFeedbackBtn = document.createElement('button');
+            goodFeedbackBtn.textContent = "Good";
+            goodFeedbackBtn.classList.add('good-feedback');
+            goodFeedbackBtn.addEventListener('click', function () {
+                displayFeedbackModal("Kindly provide your feedback:");
+                var feedbackContent = document.getElementById('feedbackPrompt');
+                feedbackContent.textContent = "Kindly provide your feedback:";
+
+                // Hide the radio buttons for feedback reasons
+                var radioButtons = document.getElementById('radioButtons');
+                radioButtons.style.display = 'none';
+
+                // Show only the comment section
+                var feedbackComment = document.getElementById('feedback-comment');
+                feedbackComment.placeholder = "Add a comment...";
+
+
+                // Add event listener to the close button
+                var closeButton = document.querySelector('#commentModal .close');
+                closeButton.addEventListener('click', function () {
+                    closeFeedbackModal();
+                });
+            });
+            feedbackButtons.appendChild(goodFeedbackBtn);
+
+            var badFeedbackBtn = document.createElement('button');
+            badFeedbackBtn.textContent = "Bad";
+            badFeedbackBtn.classList.add('bad-feedback');
+            badFeedbackBtn.addEventListener('click', function () {
+                displayFeedbackModal("Kindly provide your feedback:");
+                var feedbackContent = document.getElementById('feedbackPrompt');
+                feedbackContent.innerHTML = "Kindly provide your feedback:<br><br>What went wrong?";
+
+                // Show the radio buttons for feedback reasons
+                var radioButtons = document.getElementById('radioButtons');
+                radioButtons.style.display = 'block';
+
+                // Hide the comment section
+                var feedbackComment = document.getElementById('feedback-comment');
+                feedbackComment.value = ""; // Clear any existing comment
+                feedbackComment.placeholder = "Add a comment...";
+
+                // Add event listener to the close button
+                var closeButton = document.querySelector('#commentModal .close');
+                closeButton.addEventListener('click', function () {
+                    closeFeedbackModal();
+                });
+            });
+            feedbackButtons.appendChild(badFeedbackBtn);
+
+            feedbackSection.appendChild(feedbackButtons);
+
+            botMessage.appendChild(feedbackSection); // Append the feedback section under the bot's message
+        }
+
+
+        function sendFeedback(feedbackText, feedbackComment, feedbackReason, ques, ans, machineID, userName, button) {
             var toast = document.createElement('div');
             toast.classList.add('toast');
             toast.textContent = "Thank you for your feedback";
-            toast.style.display = 'block'; 
+            toast.style.display = 'block';
             button.parentNode.appendChild(toast);
-             
+
             var xhr = new XMLHttpRequest();
             var feedbackUrl = 'https://portal.karmayogi.nic.in/testpdf/gather/feedback';
             xhr.open('POST', feedbackUrl, true);
             xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.onreadystatechange = function() {
+            xhr.onreadystatechange = function () {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {                       
-                       // Show toast message when feedback is submitted successfully
-                        setTimeout(function() {
+                    if (xhr.status === 200) {
+                        // Show toast message when feedback is submitted successfully
+                        setTimeout(function () {
                             toast.style.display = 'none';
                         }, 3000); // Hide the toast after 3 seconds
                     } else {
@@ -599,15 +776,16 @@
                     }
                 }
             };
-            var feedbackData = JSON.stringify({ feedback: feedbackText, question: ques, answer: ans, machine_id: machineID, user_name: userName  });
-            
+            var feedbackData = JSON.stringify({ feedback: feedbackText, question: ques, answer: ans, machine_id: machineID, user_name: userName });
+
             xhr.send(feedbackData);
         }
     </script>
-     <script>
+    <script>
         // Scroll to the bottom of the chat container initially and after new messages are added
         var chatMessages = document.getElementById('chat-messages');
         chatMessages.scrollTop = chatMessages.scrollHeight;
     </script>
 </body>
+
 </html>
