@@ -9,6 +9,9 @@ from config import active_api, userID, ulcaApiKey, key_location, repo_url, sheet
 import time
 import numpy as np
 
+global global_dict
+global_dict={}
+
 # Function to fetch JSON files from GitHub
 def fetch_github_json_names():
     
@@ -94,16 +97,31 @@ def update_google_sheet(merged_df):
 
     return "Google Sheet updated successfully"
 
+##############################################################################################
+def parse_dict(filename, string1, dict1):
+    filename=filename.split(".")[0]
+    parent_dict = {}
+    values = []
 
+    for k, v in dict1.items():
+        new_key = string1 + "." + k if string1 else k
+        if isinstance(v, dict):
+            child_dict = parse_dict(filename,new_key, v)
+            parent_dict.update(child_dict)
+        else:
+            values.append(v)
+            parent_dict[filename+"."+new_key] = v
 
+    return parent_dict
+#################################################################################################
 # Function to create DataFrame from JSON files
 
 
 def create_dataframe_from_json(file_name, data):
     dfs = []  
-    
-    dict_json = {f"{file_name}.{k}.{key}": string for k, v in data.items() for key, string in v.items()}
-    
+    string1=""
+    dict_json = parse_dict(file_name,string1, data)
+    global_dict.update(dict_json)
 
     df = pd.DataFrame.from_dict(dict_json, orient='index').reset_index()
     df.rename(columns={"index": "languagekey", 0: "en_value (current)"}, inplace=True)
@@ -111,7 +129,7 @@ def create_dataframe_from_json(file_name, data):
     print(df)
     
     result_df = pd.concat(dfs, ignore_index=True)
-    result_df = result_df.groupby('en_value (current)').first()
+    # result_df = result_df.groupby('languagekey').first()###################
     result_df.reset_index(inplace=True)
 
     return result_df
@@ -197,7 +215,7 @@ def bhashini_api_call(task, target_lang, active_api, string):
         'Authorization': '9uAUqhCxaept0FGxeOUkyJ1XQSZtp9GWHy5XLriwyBsS-sovl9RkTe2Gkthwrx2F',
         'Content-Type': 'application/json'
     }
-    time.sleep(5)
+    time.sleep(30)
     response = requests.post(url, headers=headers, data=payload)
     
     translation_json = response.text
@@ -250,69 +268,85 @@ def get_api(data):
     taskType = data.get('taskType')
     api = get_active_api(taskType)
     return {"active_api": api}
+##########################################################
+def retival(input_json, output_dict):
+    new_json = {}
 
+    # Iterate through the output dictionary
+    for k, v in output_dict.items():
+        output_keys = k.split(".")  # Split the output key by '.'
+        output_keys=output_keys[1:]
+        current_dict = new_json
+        
+        # Iterate through the split keys
+        for i in range(len(output_keys)):
+            key = output_keys[i]
+            
+            # If it's the last key, update the value in new_json
+            if i == len(output_keys) - 1:
+                current_dict[key] = v
+            else:
+                # Otherwise, traverse deeper into the nested dictionaries
+                if key in current_dict:
+                    current_dict = current_dict[key]
+                else:
+                    current_dict[key] = {}
+                    current_dict = current_dict[key]
+    return new_json
+##########################################################################################################
+# print(new_json)
 def create_Json(u_in, dataframe, file, file_n):
     
     df2 = dataframe
     final_dict = {}
     l1 = []
+    string1=""
+    label_tagged_dict={}
+    label_tagged_dict.update(parse_dict(file_n, string1, file))
+    temp_dict = {}
+    for k, v in label_tagged_dict.items():
+        
 
-    for k, v in file.items():
-        temp_dict = {}
-
-        for tag, value in v.items():
-            # global value_df
-            # print(df2)
-            # break
-            # value_df=None
-            try:
-                # if value in df2["en_value (current)"].values:
-                #     if df2[f"{u_in}_value(curated)"][df2["en_value (current)"] == value].values[0] is np.nan:
-                #         value_df = df2[f"{u_in}_translated"][df2["en_value (current)"] == value].values[0]                
-                #     else:
-                #         value_df = df2[f"{u_in}_value(curated)"][df2["en_value (current)"] == value].values[0]
+        
+        try:
+            
+            if k in df2["languagekey"].values:
                 
-                    
-                if value in df2["en_value (current)"].values:
-                    if len(df2[f"{u_in}_value(curated)"][df2["en_value (current)"] == value].values[0])==0 :
-                        value_df = df2[f"{u_in}_translated"][df2["en_value (current)"] == value].values[0]                
-                    else:
-                        value_df = df2[f"{u_in}_value(curated)"][df2["en_value (current)"] == value].values[0]
-                        
+                if len(df2.loc[df2["languagekey"] == k, f"{u_in}_value(curated)"].values[0]) != 0:
+                    value_df = df2.loc[df2["languagekey"] == k, f"{u_in}_value(curated)"].values[0]
+                elif len(df2.loc[df2["languagekey"] == k, f"{u_in}_value(curated)"].values[0]) == 0:
+                    value_df = df2.loc[df2["languagekey"] == k, f"{u_in}_translated"].values[0]                
+                            
+            elif v == "NA":
+                value_df = "NA"
+            else:
+                l1.append(v)
+            # Assuming you want to continue even if no value is found
+                continue
 
-                
-
-
-                
-                
-                elif value == "NA":
-                    value_df = "NA"
-                else:
-                    l1.append(value)
-                    # Assuming you want to continue even if no value is found
-                    continue
-                temp_dict[tag] = value_df
-            except Exception as e:
-                print(f"Error occurred: {e}")
-                print(f"no value found for {tag} : {value}")
-        final_dict[k]=temp_dict 
+            temp_dict[k] = value_df
+        except Exception as e:
+            print(f"key is {k} and value is {v}")
+            print(f"Error occurred: {e}")
+            print(f"no value found for {k} : {v}")
+        # final_dict[k]=temp_dict 
         
         print("****************************")    
         print(file_n)
+        new_j=retival(file, temp_dict)
         try:
 
             if file_n.startswith("mobile"):
-
-                with open(f"{output_json_path}/{file_n}_translated_output_{u_in}", 'w', encoding='utf-8') as json_file:
-                    json.dump(final_dict["mobileApp"], json_file, indent=2, ensure_ascii=False)
-
+                with open(f"{output_json_path}/{file_n}_translated_output_{u_in}.json", 'w', encoding='utf-8') as json_file:
+                    json.dump(new_j["mobileApp"], json_file, indent=2, ensure_ascii=False)
             else:
+                with open(f"{output_json_path}/{file_n}_translated_output_{u_in}.json", 'w', encoding='utf-8') as json_file:
+                    json.dump(new_j, json_file, indent=2, ensure_ascii=False)
 
-                with open(f"{output_json_path}/{file_n}_translated_output_{u_in}", 'w', encoding='utf-8') as json_file:
-                    json.dump(final_dict, json_file, indent=2, ensure_ascii=False)
         except:
             with open(f"{output_json_path}/{file_n}_translated_output_{u_in}", 'w', encoding='utf-8') as json_file:
-                    json.dump(final_dict, json_file, indent=2, ensure_ascii=False)
+                    json.dump(final_dict, new_j, indent=2, ensure_ascii=False)
     print(f"there are {len(set(l1))} unique labels added from {file_n}") 
     
     return None
+##############################################################################################################

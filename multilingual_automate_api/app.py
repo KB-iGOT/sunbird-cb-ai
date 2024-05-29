@@ -27,7 +27,7 @@ def process_data_route():
             print(df.columns)
             print("PPPPPPPPPPPPPPPPPPP")
             print(result_df.columns)
-            refined_df = result_df[~result_df["en_value (current)"].isin(df["en_value (current)"])]
+            refined_df = result_df[~result_df["languagekey"].isin(df["languagekey"])]
             print(refined_df)
             ##
             
@@ -47,7 +47,7 @@ def process_data_route():
                 merged_df = merge_labels_for_approval(df, refined_df)
                 print(merged_df.columns)
                 # merged_df=merged_df.groupby("en_value (current)").first().reset_index()
-                merged_df = merged_df.drop_duplicates(subset="en_value (current)").reset_index(drop=True).drop(columns=["Column1"])
+                merged_df = merged_df.drop_duplicates(subset="languagekey").reset_index(drop=True).drop(columns=["Column1"])
                 print("/////////////////////////////////")
                 print(merged_df.columns)
                 merged_df.to_excel("previously updated_df.xlsx")
