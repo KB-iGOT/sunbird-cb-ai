@@ -27,8 +27,12 @@ def process_data_route():
             print(df.columns)
             print("PPPPPPPPPPPPPPPPPPP")
             print(result_df.columns)
+            for i in result_df["languagekey"]:
+                if i in df["languagekey"].values and result_df.at[result_df[result_df["languagekey"]==i].index[0], "en_value (current)"].strip() != df[df["languagekey"]==i].iloc[0]["en_value (current)"]:
+                    df.drop(df[df["languagekey"]==i].index, inplace=True)
             refined_df = result_df[~result_df["languagekey"].isin(df["languagekey"])]
             print(refined_df)
+            # refined_df.to_excel("refined_df.xlsx")
             ##
             
             if not refined_df.empty:       
