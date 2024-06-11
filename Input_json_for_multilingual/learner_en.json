@@ -68,7 +68,8 @@
         "dashboard": "Dashboard",
         "settings": "Settings",
         "noDataFound":"No data found!",
-        "somethingWentWrong": "Something went wrong, please try again later!"
+        "somethingWentWrong": "Something went wrong, please try again later!",
+        "seeAllPendingRequests":"See all pending requests"
     },
     "seeAllHome": {
         "myLearning": "My Learning",
@@ -119,7 +120,11 @@
         "allCbps": "All CBPs",
         "curatedCollections": "Curated collections",
         "search": "Search",
-        "allProviders": "All providers"
+        "allProviders": "All providers",
+        "gyaanKarmayogi": "Gyaan Karmayogi",
+        "frequentlyAskedQuestions":"Frequently asked questions",
+        "contactUs":"Contact Us",
+        "tipForLearners":"Tips For Learners"
     },
     "cardshublist": {
         "more": "More",
@@ -194,7 +199,8 @@
         "basedOnYourInterests": "Based on your interests",
         "getReadyForLearningAdventure": "Get ready for your next learning adventure",
         "clickHere": "Click here",
-        "toEnrollNextCourse": " to enroll in your next course now!"
+        "toEnrollNextCourse": " to enroll in your next course now!",
+        "moderatedHtml": "Moderated Courses, Moderated Programs and Moderated Assessments for you."
     },
     "cbpPlanFeed": {
         "title": "My iGOT",
@@ -1217,7 +1223,9 @@
         "acbpTip": "Additionally, passing all final assessments will earn you an extra 5 Karma Points. Remember, it's essential to stick to the schedule outlined in your Capacity Building Plan, as it directly impacts your Karma Points. For further details, please refer to the FAQs.",
         "completeBeforeText": "Congrats! You've completed the course and earned",
         "completeTip": "Course completion earns you 5 Karma Points. Additionally, successfully completing all final assessments gets you 5 extra Karma Points.",
-        "acbpCompleteTip": "Course completion earns you 15 Karma Points. Additionally, successfully completing all final assessments gets you 5 extra Karma Points."
+        "acbpCompleteTip": "Course completion earns you 15 Karma Points. Additionally, successfully completing all final assessments gets you 5 extra Karma Points.",
+        "fKarmaPoints":"5 Karma Points",
+        "courseEnrollement":"for your 1st course enrolment!"
     },
     "publicHome": {
         "mainSectionContent":"Learn. Network. Grow your career.",
@@ -1551,7 +1559,8 @@
         "getStarted": "'Get Started' tour",
         "myLearning": "My Learning",
         "viewProfile": "View Profile",
-        "learningHistory": "Learning History"
+        "learningHistory": "Learning History",
+        "tipsLearners": "Tips For Learners"
     },
     "requestDialog": {
         "designationRequest": "Request to add designation",
