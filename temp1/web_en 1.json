@@ -679,7 +679,12 @@
         "insightsDataFail": "Unable to get Insights data, please try again later!",
         "discussionsDataFail": "Unable to get discussions data, please try again later!",
         "hideCredentials": "Hide my credentials",
-        "viewCredentials": "View my credentials"
+        "viewCredentials": "View my credentials",
+        "note":"Note",
+        "emailApprovedNote": "1. Email ID update is allowed for approved government email IDs only. If user is not able to update, please reach out to MDO Admin.",
+        "emailDigilockerNote": "2. If a user want to access their Certificates on Digilocker, please make sure the mobile number matches on both platforms.",
+        "emailApprovedPopupMsg": "Only approved government email domains are allowed for Email ID Changes.",
+        "emailApprovedPopupSubmsg": "Please reach out to the MDO Admin, if you are not able to change the Email ID."
     },
     "mobileApp": {}
 }
