@@ -681,10 +681,15 @@
         "hideCredentials": "Hide my credentials",
         "viewCredentials": "View my credentials",
         "note":"Note",
-        "emailApprovedNote": "1. Email ID update is allowed for approved government email IDs only. If user is not able to update, please reach out to MDO Admin.",
-        "emailDigilockerNote": "2. If a user want to access their Certificates on Digilocker, please make sure the mobile number matches on both platforms.",
-        "emailApprovedPopupMsg": "Only approved government email domains are allowed for Email ID Changes.",
-        "emailApprovedPopupSubmsg": "Please reach out to the MDO Admin, if you are not able to change the Email ID."
+        "emailApprovedNoteStart": "1. Email ID update is allowed for approved government email IDs only. If",
+        "theUser": "the user",
+        "emailApprovedNoteEnd": "is not able to update, please reach out to MDO Admin.",
+        "emailDigilockerNoteStart": "2. If a user",
+        "wants": "wants",
+        "emailDigilockerNoteEnd": "to access their Certificates on Digilocker, please make sure the mobile number matches on both platforms.",
+        "emailApprovedPopupMsg": "Only approved government email domains are allowed for email ID",
+        "changes": "changes.",
+        "emailApprovedPopupSubmsg": "Please reach out to the MDO Admin, if you are not able to change the email ID."
     },
     "mobileApp": {}
 }
