@@ -39,7 +39,7 @@ def fetch_github_json(file):
     file_path = os.path.join(folder_path, file)
     file_path = file_path.replace("\\", "/")
 
-    raw_url = f"{repo_url}/{file_path}".replace('blob', 'raw')
+    raw_url = f"{repo_url}/{file_path}".replace('tree', 'raw')
     response = requests.get(raw_url)
     print(response.status_code)
     if response.status_code == 200:        
@@ -183,7 +183,7 @@ def bhashini_api_call(task, target_lang, active_api, string):
         api = active_api[0]
     else:
         api = active_api[1]
-
+    # time.sleep(15)
     url = "https://dhruva-api.bhashini.gov.in/services/inference/pipeline"
     payload = json.dumps({
         "pipelineTasks": [
@@ -215,7 +215,7 @@ def bhashini_api_call(task, target_lang, active_api, string):
         'Authorization': '9uAUqhCxaept0FGxeOUkyJ1XQSZtp9GWHy5XLriwyBsS-sovl9RkTe2Gkthwrx2F',
         'Content-Type': 'application/json'
     }
-    time.sleep(30)
+    time.sleep(20)
     response = requests.post(url, headers=headers, data=payload)
     
     translation_json = response.text
