@@ -1,6 +1,5 @@
 {
 "mobileApp": {
-  
     "mWeAreAvailable": "We are now available on",
     "mBtnFeaturedCourses": "Featured Courses",
     "mBtnSignIn": "Sign In",
@@ -2039,6 +2038,5 @@
     "mCallNow":"Call Now",
     "mEmailUs":"Email us at",
     "mStaticNoTrainingInstitutionsFound": "No training institutions found!"
-  
 }
 }
