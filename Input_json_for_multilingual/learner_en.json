@@ -2244,7 +2244,14 @@
         "emailApprovedNote": "1. Email ID update is allowed for approved government email IDs only. If the user is not able to update, please reach out to MDO Admin.",
         "emailDigilockerNote": "2. If a user wants to access their Certificates on Digilocker, please make sure the mobile number matches on both platforms.",
         "emailApprovedPopupMsg": "Only approved government email domains are allowed for email ID changes.",
-        "emailApprovedPopupSubmsg": "Please reach out to the MDO Admin, if you are not able to change the email ID."
+        "emailApprovedPopupSubmsg": "Please reach out to the MDO Admin, if you are not able to change the email ID.",
+        "isCadre": "Are you a Cadre Employee?",
+        "typeOfCivilService": "Type of Civil Service",
+        "serviceType": "Service",
+        "cadre": "Cadre",
+        "batch" : "Batch",
+        "requestForService": "Request for service",
+        "cadreControllingAuthority": "Cadre Controlling Authority"
     },
     "mobileApp": {}
 }
