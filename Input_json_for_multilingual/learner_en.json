@@ -20,12 +20,12 @@
         "knowledgeResources": "knowledge Resources",
         "dashboard": "Dashboard",
         "settings": "Settings",
-        "lastAdded":"Last added",
-        "sortByName" : "Sort By Name",
-        "connections":"connections",
-        "connection":"connection",
-        "all" : "All",
-        "search":"Search",
+        "lastAdded": "Last added",
+        "sortByName": "Sort By Name",
+        "connections": "connections",
+        "connection": "connection",
+        "all": "All",
+        "search": "Search",
         "missionKarmyogi": "Mission Karmayogi",
         "accountAndAccess": "Account and access",
         "igotMarketplace": "iGOT Marketplace",
@@ -73,6 +73,8 @@
         "seeAllPendingRequests": "See all pending requests"
     },
     "seeAllHome": {
+        "contents":"Contents",
+        "events":"Events",
         "myLearning": "My Learning",
         "inProgress": "In Progress",
         "completed": "Completed",
@@ -222,6 +224,7 @@
         "getReadyForLearningAdventure": "Get ready for your next learning adventure",
         "clickHere": "Click here",
         "toEnrollNextCourse": " to enroll in your next course now!",
+        "toEnrollNextEvents": " to enroll in your next events now!",
         "moderatedHtml": "Moderated Courses, Moderated Programs and Moderated Assessments for you."
     },
     "cbpPlanFeed": {
@@ -299,6 +302,7 @@
         "competencyType": "Competency type:",
         "competencyArea:": "Competency area:",
         "competencyArea": "Competency area",
+        "competencyTheme": "Competency Theme",
         "allCbps": "All associated CBPs",
         "cbpsFor": "CBPs for",
         "noCbps": "No CBPs found!",
@@ -403,6 +407,7 @@
         "content": "Content",
         "sessions": "Sessions",
         "discussion": "Discussion",
+        "discussions": "Discussions",
         "summary": "Summary",
         "description": "Description",
         "viewMore": "view more",
@@ -420,7 +425,7 @@
         "certificateEarned": "Certificate earned",
         "anySuggestions": "Do you have any questions, suggestions or, ideas in your mind? Post it.",
         "competency": "Competency",
-        "type": "Type",
+        "type": "Competency Area",
         "ratingsReviews": "Ratings and reviews",
         "topReviews": "Top reviews",
         "latestReviews": "Latest reviews",
@@ -500,7 +505,8 @@
         "selfLearning": "Self learning",
         "completedCourse": "You completed this course on",
         "provider": "Provider",
-        "objectives": "Objectives"
+        "objectives": "Objectives",
+        "comments": "Comments"
     },
     "ratingsummary": {
         "ratings": "ratings",
@@ -853,7 +859,8 @@
         "backToAssessment": "Back to assessment",
         "section": "Section",
         "noOfQuestions": "No of Questions",
-        "markedForReview": "Marked for Review"
+        "markedForReview": "Marked for Review",
+        "paragraphLabel": "Read the paragraph and answer the question below"
     },
     "quizresult": {
         "score": "score",
@@ -937,7 +944,11 @@
         "curatedEvents": "Curated events",
         "mdoEvents": "Events in your MDO",
         "webinar": "Webinar",
-        "karmayogiTalks": "Karmayogi Talks"
+        "karmayogiTalks": "Karmayogi Talks",
+        "live": "Live",
+        "karmayogiSaptah": "Karmayogi Saptah",
+        "moreKarmaPoints": "more KarmaPoints",
+        "completedEvent": "You completed this event on"
     },
     "eventDetailsRightCard": {
         "viewRecording": "View recording",
@@ -945,7 +956,10 @@
         "joinEvent": "Join event",
         "eventIsYetToStart": "Event is yet to start",
         "eventType": "Event Type",
-        "hostedBy": "Hosted By"
+        "hostedBy": "Hosted By",
+        "enroll": "Enroll",
+        "noBatchErrormsg": "No batches available!",
+        "certificateInfo": "Your Certificate will be generated within 1 week."
     },
     "eventPresentorsCard": {
         "host": "Host"
@@ -1295,7 +1309,7 @@
         "moreKarmaPoints": "more KarmaPoints",
         "firstEnroll": "for your 1st course enrolment.",
         "firstEnrollTip": "Note: This is only applicable for your first enrolment.",
-        "courseCompleteTip" : "Every course completion automatically gets you 5 Karma Points.",
+        "courseCompleteTip": "Every course completion automatically gets you 5 Karma Points.",
         "byCompleting": "by completing this course.",
         "rateThis": ", rate this content!",
         "rateTip": "Your course rating serves as a valuable recommendation to Karmayogis, so go ahead and RATE.",
@@ -1306,7 +1320,13 @@
         "completeTip": "For every My iGOT course you complete (as per ACBP), you will earn 15 Karma Points. For every other course you complete, you will earn 5 Karma Points, up to a maximum of four courses per month. Start learning and watch your Karma grow!",
         "acbpCompleteTip": "Course completion earns you 15 Karma Points. Additionally, successfully completing all final assessments gets you 5 extra Karma Points.",
         "fKarmaPoints": "5 Karma Points",
-        "courseEnrollement": "for your 1st course enrolment!"
+        "courseEnrollement": "for your 1st course enrolment!",
+        "enrollEvent": "for your event enrolment.",
+        "enrollTipEvent": "For every enrollment you get 5 karma points",
+        "eventCompleteTipEvent": "Every event completion automatically gets you 10 Karma Points.",
+        "byCompletingEvent": "by completing this event.",
+        "completeBeforeTextEvent": "Congrats! You've completed the event and earned 10 karma points",
+        "fKarmaPointsEvent": "5 Karma Points"
     },
     "publicHome": {
         "mainSectionContent": "Learn. Network. Grow your career.",
@@ -1334,6 +1354,8 @@
         "growSection": "Learn. Network. Take your career growth to the next level."
     },
     "home": {
+        "contents":"Contents",
+        "events":"Events",
         "learnHub": "Go to learn hub",
         "updateTitle": "Update your mobile number",
         "updateMobile": "Update your mobile number. This will enable you to login with your mobile number easily and receive important alerts on your mobile.",
@@ -1407,12 +1429,15 @@
         "programs": "Programs",
         "assessments": "Assessments",
         "showAll": "Show all",
+        "liveEvents": "Live Events",
         "updateYourProfile": "Update your profile and get it verified",
         "updateNow": "Update now",
         "myDiscussions": "My Discussions",
         "recentlyAdded": "Recently added",
         "youWillFindYourCompletedCourses/programHere": "You will find your completed courses/program here",
-        "today'sEvents": "Today's events",
+        "today'sEvents": "Today's Events",
+        "keySpeakersEvents": "Key Speakers Events",
+        "noDataCourse": "No Courses Available.",
         "youDon’tHaveAnyNewCourseInProgress.": "You don’t have any content in progress.",
         "youWillSeeAllTheContentForWhichTheDueDateIsWithin30Days.": "You will see all the content that needs to be completed within the next 30 days.",
         "youWillSeeAllTheContentThatNeedsToBeCompletedWithinTheNext30Days.": "You will see all the content that needs to be completed within the next 30 days.",
@@ -1431,7 +1456,11 @@
         "atinotopassessments": "Currently, there are no top assessments available. Please check back later for updates on our upcoming assessments",
         "noCbpData": "No capacity building plans yet.",
         "trainingInstitutions": "Training Institutions",
-        "providers": "Providers"
+        "providers": "Providers",
+        "notMyUser1": "You are no longer recognized as a user by your current organization, and access to the platform will end ",
+        "notMyUser2": "within 48 hours",
+        "notMyUser3": "If you believe this is incorrect, contact your MDO or make a \"Transfer Request\" to select your proper organization.",
+        "completedEvents": "You will find your completed events here."
     },
     "homeotherportals": {
         "otherPortals": "Other Portals You Have Access To",
@@ -1797,6 +1826,7 @@
         "removeFilters": "Try removing the filters or search using different keywords"
     },
     "searchfilters": {
+        "karmayogiSaptah": "Karmayogi Saptah",
         "filterSearch": "Filter search",
         "contentType": "Content Type",
         "program": "Program",
@@ -2162,6 +2192,7 @@
         "category": "Category",
         "officePinCode": "Office Pin Code",
         "eHRMSId": "eHRMS ID/External System ID",
+        "dor": "Date of Retirement",
         "saveChanges": "Save Changes",
         "tags": "Tags",
         "tagsNotFound": "No tags found!",
@@ -2239,8 +2270,8 @@
         "sc": "SC",
         "st": "ST",
         "viewMentorProfile": "View Mentor Profile",
-        "note":"Note",
-        "ok":"Ok",
+        "note": "Note",
+        "ok": "Ok",
         "emailApprovedNote": "1. Email ID update is allowed for approved government email IDs only. If the user is not able to update, please reach out to MDO Admin.",
         "emailDigilockerNote": "2. If a user wants to access their Certificates on Digilocker, please make sure the mobile number matches on both platforms.",
         "emailApprovedPopupMsg": "Only approved government email domains are allowed for email ID changes.",
@@ -2249,9 +2280,10 @@
         "typeOfCivilService": "Type of Civil Service",
         "serviceType": "Service",
         "cadre": "Cadre",
-        "batch" : "Batch",
+        "batch": "Batch",
         "requestForService": "Request for service",
-        "cadreControllingAuthority": "Cadre Controlling Authority"
+        "cadreControllingAuthority": "Cadre Controlling Authority",
+        "notMyUseAccessRevoke": "Your access has been revoked because your organization no longer identifies you as a user. To regain access, please submit a \"Transfer Request\" and choose the correct organization."
     },
     "mobileApp": {}
 }
